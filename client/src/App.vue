@@ -1,23 +1,51 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div id="app">
+<!--    <img src="./assets/logo.png">-->
+<!--    <router-view/>-->
+    <router-view v-if="isRouterAlive"></router-view>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  components: {},
+export default {
   name: 'App',
-  setup() {
-    return {}
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
+  data () {
+    return {
+      isRouterAlive: true
+    }
+  },
+  components: {
+  },
+  mounted () {
+    window.addEventListener('unload', this.saveState)
+  },
+  methods: {
+    saveState () {
+      sessionStorage.setItem('userState', JSON.stringify(this.$store.state.user))
+    },
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    }
   }
-})
+}
 </script>
 
-<style scoped lang="less">
-.app {
-  height: 100%;
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

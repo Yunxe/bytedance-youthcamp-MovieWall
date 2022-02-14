@@ -1,15 +1,14 @@
-import { createStore } from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-const store = createStore({
-  state() {
-    return {
-      name: 'John',
-      age: '489'
-    }
-  },
-  mutations: {},
-  getters: {},
-  actions: {},
-  modules: {}
-})
-export default store
+Vue.use(Vuex);
+
+import user from "./modules/user";
+
+
+export default new Vuex.Store({
+  modules:{
+    user
+  }
+});
+
