@@ -1,7 +1,5 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+  <div class="main">main</div>
 </template>
 
 <script>
@@ -9,15 +7,10 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {},
-  name: 'App',
   setup() {
     return {}
   }
 })
 </script>
 
-<style scoped lang="less">
-.app {
-  height: 100%;
-}
-</style>
+<style scoped lang="less"></style>

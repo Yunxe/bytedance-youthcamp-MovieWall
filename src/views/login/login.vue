@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div class="login">
+    <el-button> login</el-button>
   </div>
 </template>
 
@@ -9,7 +9,6 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {},
-  name: 'App',
   setup() {
     return {}
   }
@@ -17,7 +16,12 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
-.app {
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 100%;
+  // background: url();
 }
 </style>

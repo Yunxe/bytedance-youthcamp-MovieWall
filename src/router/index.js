@@ -1,26 +1,32 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import localCache from '@/utils/cache'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: 'login'
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login',
+    component: () => import('@/views/login/login.vue')
+  },
+  {
+    path: '/main',
+    component: () => import('@/views/main/main.vue')
   }
 ]
-
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+  routes,
+  history: createWebHashHistory()
+})
+// 导航守卫，如果用户直接进入非登录页面，要判断本地是否要token缓存，不然就不用登录直接进入页面
+router.beforeEach((to) => {
+  if (to.path !== './login') {
+    const token = localCache.getCache('token')
+    if (!token) {
+      return './login'
+    }
+  }
 })
 
 export default router
