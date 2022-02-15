@@ -12,5 +12,7 @@ const sequelize = new Sequelize(dbConfig.name, dbConfig.username, dbConfig.passw
         }
     }
 });
-
+(async () => {
+    await sequelize.sync();
+})();
 module.exports = sequelize
