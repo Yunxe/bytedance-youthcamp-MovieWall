@@ -15,7 +15,8 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "test": "nodemon /bin/www"
+    "test": "nodemon /bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/www"
   },
   "author": "",
   "license": "ISC",
