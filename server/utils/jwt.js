@@ -1,13 +1,22 @@
 const { TOKEN_CONFIG } = require("../config");
 const jwt = require("jsonwebtoken");
 
-const signToken = (userName) => {
+const signToken = (uid) => {
   const token = jwt.sign(
-    { iss: "MovieWall", iat: Date.now(), userName: userName },
+    { iss: "MovieWall", iat: Date.now(), uid: uid },
     TOKEN_CONFIG.tokenSecret,
     { expiresIn: TOKEN_CONFIG.tokenExpiredTime }
   );
   return token;
 };
 
-module.exports = signToken
+const authToken = (headerJwt) => {
+  const verifiedJwt = jwt.verify(
+    headerJwt.replace("Bearer ", ""),
+    TOKEN_CONFIG.tokenSecret
+  );
+  const { uid } = verifiedJwt;
+  return uid;
+};
+
+module.exports = {signToken,authToken};

@@ -1,6 +1,7 @@
 const dbConfig = require("../config").DATABASE_CONFIG.db
 const {Sequelize} = require("sequelize");
 
+
 const sequelize = new Sequelize(dbConfig.name, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
     dialect: "mysql",
@@ -12,8 +13,10 @@ const sequelize = new Sequelize(dbConfig.name, dbConfig.username, dbConfig.passw
         }
     }
 });
+
 (async () => {
     await sequelize.sync();
 })();
 
 module.exports = sequelize
+
