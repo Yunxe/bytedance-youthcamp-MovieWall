@@ -1,4 +1,4 @@
-const AUTH_FREE = ["/user/register", "/user/login", "/movie/show"].map(
+const AUTH_FREE = ["/user/register", "/user/login", "/movie/show-all","/movie/show-one"].map(
   (v) => `/api${v}`
 );
 
