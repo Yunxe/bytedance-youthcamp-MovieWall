@@ -71,7 +71,7 @@ export default {
       const _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('http://106.55.103.151:8080/user/register', this.form)
+          axios.post('http://106.55.103.151:8080/api/user/register', this.form)
             .then(function (resp) {
               console.log(resp)
               if (resp.data.code === 1) {
@@ -81,7 +81,7 @@ export default {
                     _this.$router.push('/login')
                   }
                 })
-              } else if (resp.msg === '用户名已存在') {
+              } else if (resp.data.msg === '用户名已存在') {
                 _this.$message({
                   message: '用户名已注册!',
                   type: 'warning'

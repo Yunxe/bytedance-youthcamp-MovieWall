@@ -66,7 +66,7 @@ export default {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           // 测试数据交互
-          axios.post('http://106.55.103.151:8080/user/login', this.form)
+          axios.post('http://106.55.103.151:8080/api/user/login', this.form)
             .then(res => {
               console.log(res)
               if (res.data.code === 1) {
@@ -81,20 +81,17 @@ export default {
                 sessionStorage.setItem('isLogin', 'true')
                 this.$store.dispatch('asyncUpdateUser', {username: this.form.userName})
                 // alert('submit!');1
-                _this.$alert('注册成功！', 'OK', {
-                  confirmButtonText: '确定',
-                  callback: action => {
-                    _this.$router.push('/login')
-                  }
-                })
-                // this.$message({
-                //   message: '恭喜你，验证通过！',
-                //   duration: 500,
-                //   type: 'success'
+                // _this.$alert('登录成功！', 'OK', {
+                //   confirmButtonText: '确定'
                 // })
+                this.$message({
+                  message: '恭喜你，验证通过！',
+                  duration: 500,
+                  type: 'success'
+                })
                 // 编程式导航，以代码方式跳转
                 // this.$router.push("/main");
-                this.$router.push({name: 'Home1', params: {username: this.form.userName}})
+                this.$router.push({name: 'Home1', params: {userName: this.form.userName}})
               } else {
                 this.$message({
                   message: '账号或密码错误！',

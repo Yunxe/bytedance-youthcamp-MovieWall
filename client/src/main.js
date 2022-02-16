@@ -23,7 +23,7 @@ Vue.config.productionTip = false
 // Vue.prototype.$http = Axios
 Vue.config.productionTip = false
 
-const whiteList = ['/login', '/register', '/home', '/home1', '/home2'] // 不重定向白名单
+const whiteList = ['/login', '/register', '/home', '/home1', '/home2', '/des', '/test', '/des'] // 不重定向白名单
 
 // 路由跳转前
 router.beforeEach((to, from, next) => {
@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   } else if (isLogin == null) {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
-    } else { next({path: '/login'}) }
+    } else { next({path: '/home1'}) }
   }
 
   next()
@@ -54,6 +54,7 @@ Vue.use(ElementUI)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

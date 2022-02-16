@@ -11,15 +11,18 @@
     <i class="el-icon-arrow-down el-icon--right"></i>
   </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><a>退出登陆</a></el-dropdown-item>
+          <el-dropdown-item><a href="Login.vue">登录</a></el-dropdown-item>
+          <router-link to="/logout">
+            <el-dropdown-item>退出登陆</el-dropdown-item>
+          </router-link>
         </el-dropdown-menu>
       </el-dropdown>
       </li>
       <li class="right"><div class="im"><img class="cover" src="../assets/p.jpg"></div>
       </li>
       <li class="right">
-        <!--        <span>{{$store.getters.getUser.username}}</span>-->
-        <span>{{userName}}</span>
+                <span>{{$store.getters.getUser.userName}}</span>
+<!--        <span>{{userName}}</span>-->
       </li>
     </ul>
     <div class="clear"></div>
