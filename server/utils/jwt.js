@@ -11,8 +11,9 @@ const signToken = (uid) => {
 };
 
 const authToken = (headerJwt) => {
+  const token = headerJwt.replace("Bearer ", "")
   const verifiedJwt = jwt.verify(
-    headerJwt.replace("Bearer ", ""),
+    token,
     TOKEN_CONFIG.tokenSecret
   );
   const { uid } = verifiedJwt;

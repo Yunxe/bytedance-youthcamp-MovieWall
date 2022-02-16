@@ -2,7 +2,7 @@ const express = require("express");
 const { User, DBMovies } = require("../models");
 const userRouter = express.Router();
 const { Restful, filterObject } = require("../utils");
-const signToken = require("../utils/jwt");
+const {signToken} = require("../utils/jwt");
 
 userRouter.get("/index", (req, res) => {
   res.end("userRouter index");
@@ -62,6 +62,7 @@ userRouter.post("/show-my-movies", async (req, res, next) => {
     const { uid } = req.body;
     const movies = await User.findOne({
       where: { uid: uid },
+      attributes:{exclude:['password']},
       include: [
         {
           model: DBMovies,
