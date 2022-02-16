@@ -7,7 +7,7 @@
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="80px;" class="login-box">
           <!--  用户名-->
-          <el-form-item label="账号" prop="username">
+          <el-form-item label="账号" prop="userName">
             <el-input type="text" placeholder="Please enter your account number" v-model="form.userName"/>
           </el-form-item>
           <!--  密码-->
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Login',
   data: function () {
@@ -43,7 +45,7 @@ export default {
         rememberMe: false
       },
       rules: {
-        username: [
+        userName: [
           {required: true, message: '请输入账号', trigger: 'blur'},
           {min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur'}
         ],
@@ -60,15 +62,14 @@ export default {
       this.$router.replace('/register')
     },
     submitForm: function (formName) {
+      const _this = this
       this.$refs[formName].validate(async valid => {
         if (valid) {
           // 测试数据交互
-          this.$http.post('http://host:8080/api/user/login', {
-            userName: this.form.userName,
-            password: this.form.password
-          })
+          axios.post('http://106.55.103.151:8080/user/login', this.form)
             .then(res => {
-              if (res.code === 1) {
+              console.log(res)
+              if (res.data.code === 1) {
                 // 登录成功
                 console.log(`登录成功！`)
                 // console.log(res.data)
@@ -80,11 +81,17 @@ export default {
                 sessionStorage.setItem('isLogin', 'true')
                 this.$store.dispatch('asyncUpdateUser', {username: this.form.userName})
                 // alert('submit!');1
-                this.$message({
-                  message: '恭喜你，验证通过！',
-                  duration: 500,
-                  type: 'success'
+                _this.$alert('注册成功！', 'OK', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    _this.$router.push('/login')
+                  }
                 })
+                // this.$message({
+                //   message: '恭喜你，验证通过！',
+                //   duration: 500,
+                //   type: 'success'
+                // })
                 // 编程式导航，以代码方式跳转
                 // this.$router.push("/main");
                 this.$router.push({name: 'Home1', params: {username: this.form.userName}})
@@ -96,14 +103,6 @@ export default {
                 })
                 return false
               }
-            })
-            .catch(error => {
-              this.$message({
-                message: '账号或密码错误！',
-                duration: 500,
-                type: 'warning'
-              })
-              return false
             })
         }
       })
@@ -252,5 +251,11 @@ p{
 }
 .styled-button:active {
   box-shadow: 0 0 5px #031FFAA8;
+}
+
+.zc{
+  margin-left: 20px;
+  float: left;
+  display: inline-block;
 }
 </style>

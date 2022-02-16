@@ -6,18 +6,24 @@ import App from './App'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+
 import router from './router'
 
 import Vuex from 'vuex'
+import store from './store'
+
+// import Video from 'video.js'
+// import 'video.js/dist/video-js.css'
 
 // 挂在axios
 import {Axios} from './utils/axios'
+// Vue.prototype.$video = Video
 
 Vue.config.productionTip = false
-Vue.prototype.$http = Axios
+// Vue.prototype.$http = Axios
 Vue.config.productionTip = false
 
-const whiteList = ['/login', '/register', '/home'] // 不重定向白名单
+const whiteList = ['/login', '/register', '/home', '/home1', '/home2'] // 不重定向白名单
 
 // 路由跳转前
 router.beforeEach((to, from, next) => {
@@ -29,7 +35,7 @@ router.beforeEach((to, from, next) => {
     next({path: '/login'})
   } else if (to.path === '/login') {
     if (isLogin != null) {
-      next({path: '/main'})
+      next({path: '/home1'})
     }
   } else if (isLogin == null) {
     if (whiteList.indexOf(to.path) !== -1) {

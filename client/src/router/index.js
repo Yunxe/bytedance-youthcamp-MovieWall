@@ -6,6 +6,7 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import Home from '../views/Home'
 import Home1 from '../views/Home1'
+import Home2 from '../views/Home2'
 Vue.use(Router)
 
 export default new Router({
@@ -38,7 +39,7 @@ export default new Router({
     },
     {
       // 首页
-      path: '/Home',
+      path: '/home',
       name: 'Home',
       component: Home,
       children: [
@@ -47,6 +48,12 @@ export default new Router({
           path: '/home1',
           name: 'Home1',
           component: Home1
+        },
+        {
+          // 个人页面
+          path: '/home2',
+          name: 'Home2',
+          component: Home2
         }
       ]
     }
