@@ -11,13 +11,13 @@ const signToken = (uid) => {
 };
 
 const authToken = (headerJwt) => {
-  const token = headerJwt.replace("Bearer ", "")
-  const verifiedJwt = jwt.verify(
-    token,
-    TOKEN_CONFIG.tokenSecret
-  );
+  if (!headerJwt) {
+    return null;
+  }
+  const token = headerJwt.replace("Bearer ", "");
+  const verifiedJwt = jwt.verify(token, TOKEN_CONFIG.tokenSecret);
   const { uid } = verifiedJwt;
   return uid;
 };
 
-module.exports = {signToken,authToken};
+module.exports = { signToken, authToken };
