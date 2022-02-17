@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.16.1"
+    "sequelize": "^6.7.0"
   },
   "name": "server",
   "version": "1.0.0",
@@ -14,7 +15,8 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "test": "nodemon /bin/www"
+    "test": "nodemon /bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/www"
   },
   "author": "",
   "license": "ISC",

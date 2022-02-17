@@ -1,16 +1,20 @@
-const dbConfig = require("../config").db
-const {Sequelize} = require("sequelize");
+const sequelize = require("../databases/sequelize");
+const DBMovies = require("./movies");
+const User = require("./user");
+const UserDBMovies = require("./UserMovie");
 
-const sequelize = new Sequelize(dbConfig.name, dbConfig.username, dbConfig.password, {
-    host: dbConfig.host,
-    dialect: "mysql",
-    timezone: "+08:00",
-    define: {
-        charset: 'utf8',
-        dialectOptions: {
-            collate: 'utf8_general_ci'
-        }
-    }
+DBMovies.belongsToMany(User, {
+  through: UserDBMovies,
+  as: "users",
+  foreignKey: "mid",
+  onDelete: 'CASCADE',
+
+});
+User.belongsToMany(DBMovies, {
+  through: UserDBMovies,
+  as: "movies",
+  foreignKey: "uid",
+  onDelete: 'CASCADE',
 });
 
-module.exports = sequelize
+module.exports = { DBMovies, User };
