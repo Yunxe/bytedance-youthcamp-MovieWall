@@ -1,7 +1,7 @@
 <template>
   <div class="box">
   <div class="max-box">
-    <div v-for="(row,index) in sliceList(films,9)" :key="index" class="row">
+    <div v-for="(row,index) in sliceList(films,6)" :key="index" class="row">
 <!--      <router-link to="/test"><img class="img" :src="film.src"></router-link>-->
 <!--        <br>{{film.desc}}-->
       <div v-for="(item,i) in row" :key="i" class="middle-box">
@@ -175,24 +175,24 @@ export default {
   background-position: center;
   overflow: hidden;
 }
-.middle-box img:nth-child(1){
-  flex: 1;
-  height: 200px;
-  background-color: pink;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
-.middle-box img:nth-child(n+2):nth-child(-n+5){
-  flex: 1;
-  height: 100px;
+/*.middle-box img:nth-child(1){*/
+/*  flex: 1;*/
+/*  height: 200px;*/
+/*  background-color: pink;*/
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*  overflow: hidden;*/
+/*}*/
+/*.middle-box img:nth-child(n+2):nth-child(-n+5){*/
+/*  flex: 1;*/
+/*  height: 100px;*/
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*  overflow: hidden;*/
+/*}*/
 
 /*有多个小图片盒子的中盒子*/
 .middle-box-mult-min {

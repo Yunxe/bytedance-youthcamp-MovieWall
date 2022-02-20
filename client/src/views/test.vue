@@ -99,152 +99,153 @@ export default {
   name: 'test',
   data () {
     return {
-      films: [
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(1).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(2).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(3).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(4).jpg')
-        },
-        {
-          id: '5',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(5).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(6).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(7).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(8).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(9).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(10).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(11).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(12).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('D:/film/src/assets/pic/p(1).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(2).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(3).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(4).jpg')
-        },
-        {
-          id: '5',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(5).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(6).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(7).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(8).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(9).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(10).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(11).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(12).jpg')
-        }
-      ]
+      films:[]
+      // films: [
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(1).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(2).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(3).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(4).jpg')
+      //   },
+      //   {
+      //     id: '5',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(5).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(6).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(7).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(8).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(9).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(10).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(11).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(12).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('D:/film/src/assets/pic/p(1).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(2).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(3).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(4).jpg')
+      //   },
+      //   {
+      //     id: '5',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(5).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(6).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(7).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(8).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(9).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(10).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(11).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(12).jpg')
+      //   }
+      // ]
     }
   }
 }

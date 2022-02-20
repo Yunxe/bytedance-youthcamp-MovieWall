@@ -24,6 +24,8 @@
               class="styled-button__text">立即登录</span> </span> </span> </span> </button>
             <div class="zc">
               <el-button type="primary" plain @click="gotolink()">账号注册</el-button>
+              <el-button type="primary" plain><router-link to="/home1">去往首页</router-link></el-button>
+
             </div>
           </el-form-item>
         </el-form>
@@ -63,10 +65,11 @@ export default {
     },
     submitForm: function (formName) {
       const _this = this
+      console.log(_this.form)
       this.$refs[formName].validate(async valid => {
         if (valid) {
           // 测试数据交互
-          axios.post('http://106.55.103.151:8080/api/user/login', this.form)
+          axios.post("http://106.55.103.151:8080/api/user/login",_this.form)
             .then(res => {
               console.log(res)
               if (res.data.code === 1) {
@@ -74,24 +77,25 @@ export default {
                 console.log(`登录成功！`)
                 // console.log(res.data)
                 //  将Token保存到localStorage
-                const authorization = res.data.Authorization
+                const authorization = res.data.data.token
                 localStorage.token = authorization
-                this.msg = authorization
+                _this.msg = authorization
                 // 是否登录
                 sessionStorage.setItem('isLogin', 'true')
-                this.$store.dispatch('asyncUpdateUser', {username: this.form.userName})
+                _this.$store.dispatch('asyncUpdateUser', {username: this.form.userName})
                 // alert('submit!');1
                 // _this.$alert('登录成功！', 'OK', {
                 //   confirmButtonText: '确定'
                 // })
-                this.$message({
+                console.log(localStorage.getItem('token'))
+                _this.$message({
                   message: '恭喜你，验证通过！',
                   duration: 500,
                   type: 'success'
                 })
                 // 编程式导航，以代码方式跳转
                 // this.$router.push("/main");
-                this.$router.push({name: 'Home1', params: {userName: this.form.userName}})
+                _this.$router.push({name: 'Home1', params: {userName: this.form.userName}})
               } else {
                 this.$message({
                   message: '账号或密码错误！',
@@ -254,5 +258,8 @@ p{
   margin-left: 20px;
   float: left;
   display: inline-block;
+}
+a{
+  text-decoration: none;
 }
 </style>

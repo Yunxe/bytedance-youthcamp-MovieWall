@@ -9,23 +9,23 @@
       </div>
       <div class="detail-mes-box">
         <div class="movie-name">
-          {{ movie.title }}
+          {{ movie.chTitle }}<br>
           <el-button type="primary" className="collection-btn" @click="like()">
             <div class="like">收藏</div>
-            <div class="like"><img src="../assets/dislikeIcon.svg"></div>
+            <div class="like"><img :src="imgUrl"></div>
           </el-button>
         </div>
         <div class="time-mes">
           <div class="create-time">
             <div class="time-text">创建时间</div>
-            <div class="create-mes">{{ movie.createAt }}</div>
+            <div class="create-mes">{{ Date(movie.releaseDate).slice(0,15)}}</div>
           </div>
           <div class="update-time">
             <div class="time-text">更新时间</div>
-            <div class="update-mes">{{ movie.updateAt }}</div>
+            <div class="update-mes">{{ Date(movie.updatedAt).slice(0,15) }}</div>
           </div>
         </div>
-        <div class="big-poster"><img :src="movie.posterUrl"></div>
+
         <div>
           <div class="de">
             <div class="time-text">导演</div>
@@ -35,7 +35,12 @@
             <div class="time-text">豆瓣评分</div>
             <div class="update-mes">{{ movie.dbScore }}</div>
           </div>
+          <div class="poster">
+            <div class="time-text">海报</div></div>
+            <div class="big-poster"><img :src="movie.posterUrl"></div>
         </div>
+        <div class="det">
+          <div class="time-text">详细描述</div></div>
         <div class="movie-description">
           {{ movie.detail }}
         </div>
@@ -54,10 +59,10 @@ export default {
       param:{},
       dbID: '',
       imgArr: ['dislikeIcon.svg', 'likeIcon.svg'],
-      imgIndex: '0',
+      imgIndex: 0,
       movie: {
         dbID: '',
-        title: '肖申克的救赎',
+        chTitle: '肖申克的救赎',
         director: '弗兰克·德拉邦特',
         dbScore: '999',
         detail: '《肖申克的救赎》（英语：The Shawshank\n' +
@@ -67,8 +72,8 @@ export default {
           '          美国各地共投入32万余份本片的VHS录像带，凭借各大奖项提名及口耳相传的良好口碑，《肖申克的救赎》在1995年录像带出租版创下佳绩。透纳广播公司收购城堡石娱乐公司后获得影片电视播映权，从1997年开始在特纳电视网定期播映，进一步提升作品知名度。如今，《肖申克的救赎》已被普遍视为20世纪90年代的电影杰作。数十年后，影片仍在定期播放，而且跨越国界乃至洲界限制，普通观众和名流都称本片是灵感的来源，电影也在大量民意调查结果中名列前茅。2015年，本片因“文化、历史和美学领域的显著成就”，入选美国国会图书馆国家影片登记表。\n' +
           '        ',
         posterUrl: require('../assets/pic/p(20).jpg'),
-        createAt: '2021/02/02',
-        updateAt: '2021/02/02'
+        releaseDate: '2021/02/02',
+        updatedAt: '2021/02/02'
       }
     }
   },
@@ -79,17 +84,27 @@ export default {
     // this.param.append('dbID', _this.$route.params.dbID);
     // console.log(_this.param)
     _this.param = _this.$route.params
-    _this.dbID = _this.$route.params.dbID
+    _this.dbID = Number(_this.$route.params.dbID)
     console.log(_this.param)
-    axios.post('http://106.55.103.151:8080/api/movie/show-one', _this.param,{
-      headers:{
-        authorization:localStorage.getItem('token')
-      }
-    })
-  .then(function (resp) {
-        console.log(resp);
-        _this.movie = resp.data;
+    if(sessionStorage.getItem('isLogin')!=='true'){
+      // alert('submit!');1
+      axios.post('http://106.55.103.151:8080/api/movie/show-one', _this.param)
+        .then(function (resp) {
+          console.log(resp);
+          _this.movie = resp.data.data;
+        })
+    }else{
+      axios.post('http://106.55.103.151:8080/api/movie/show-one', _this.param,{
+        headers:{
+          authorization:'Bearer ' +localStorage.getItem('token')
+        }
       })
+        .then(function (resp) {
+          console.log(resp);
+          _this.movie = resp.data.data;
+          _this.imgIndex = resp.data.data.isCollect;
+        })
+    }
   },
   computed: {
     imgUrl: function () {
@@ -98,25 +113,34 @@ export default {
   },
   methods : {
     like() {
-      this.param = new FormData();
-      this.param.append('user',this.$store.getters.getUser.username);
-      this.param.append('dbID', this.dbID);
-      console.log(this.param.get('user'));
-      console.log(this.param.get('dbID'));
-      console.log(this.param)
+      // this.param = new FormData();
+      // this.param.append('userName',this.$store.getters.getUser.username);
+      // this.param.append('dbID', this.dbID);
+      // console.log(this.param.get('userName'));
+      // console.log(this.param.get('dbID'));
+      // console.log(this.param)
+      if(sessionStorage.getItem('isLogin')!=='true'){
+        // alert('submit!');1
+        this.$alert('请先登录！', 'OK', {
+          confirmButtonText: '确定'
+        })
+      }
       const _this = this;
+      _this.param = _this.$route.params
+      _this.dbID = Number(_this.$route.params.dbID)
+      console.log(_this.param)
+      console.log(localStorage.getItem('token'))
       axios.post('http://106.55.103.151:8080/api/movie/collect', _this.param,{
         headers:{
-          authorization:localStorage.getItem('token')
+          authorization:'Bearer ' +localStorage.getItem('token')
         }
-      })
-        .then(function (resp) {
+      }).then(function (resp) {
           console.log(resp);
           if (resp.data.code === 1) {
-            if (this.imgIndex === '0') {
-              this.imgIndex = '1';
+            if (_this.imgIndex === 0) {
+              _this.imgIndex = 1;
             } else {
-              this.imgIndex = '0';
+              _this.imgIndex = 0;
             }
           }
         })
@@ -195,7 +219,7 @@ export default {
 .movie-name {
   height: 50px;
   line-height: 50px;
-  width: 200px;
+  width: 600px;
   left: 80px;
   top: 60px;
   font-size: 30px;
@@ -208,7 +232,7 @@ export default {
   width: 160px;
   background-color: #8DDDFDFF;
   color: black;
-  height: 40px;
+  height: 30px;
 }
 
 .collection-btn:hover {
@@ -226,7 +250,7 @@ export default {
 
 .create-time {
   display: flex;
-  right: 400px;
+  right: 300px;
   top: 82px;
   position: absolute;
   align-items: center;
@@ -235,8 +259,8 @@ export default {
 .big-poster {
   width: 160px;
   height: 180px;
-  right: 30px;
-  top: 30px;
+  left: 80px;
+  top: 216px;
   position: absolute;
   /*background: url("../assets/pic/p(20).jpg") no-repeat;*/
   background-size: cover;
@@ -252,7 +276,7 @@ export default {
 
 .update-time {
   display: flex;
-  right: 200px;
+  right: 100px;
   top: 82px;
   position: absolute;
   align-items: center;
@@ -260,7 +284,7 @@ export default {
 
 .de {
   display: flex;
-  right: 400px;
+  right: 300px;
   top: 132px;
   position: absolute;
   align-items: center;
@@ -268,12 +292,25 @@ export default {
 
 .dou {
   display: flex;
-  right: 200px;
+  right: 100px;
   top: 132px;
   position: absolute;
   align-items: center;
 }
-
+.poster{
+  display: flex;
+  left: 70px;
+  top: 180px;
+  position: absolute;
+  align-items: center;
+}
+.det{
+  display: flex;
+  left: 70px;
+  top: 420px;
+  position: absolute;
+  align-items: center;
+}
 .time-text {
   font-weight: 600;
   margin-right: 15px;
@@ -309,7 +346,7 @@ export default {
 .movie-description {
   width: 966px;
   left: 67px;
-  top: 220px;
+  top: 450px;
   position: absolute;
   font-weight: 500;
   line-height: 43px;

@@ -16,14 +16,13 @@ import store from './store'
 // import 'video.js/dist/video-js.css'
 
 // 挂在axios
-import {Axios} from './utils/axios'
+// import {Axios} from './utils/axios'
 // Vue.prototype.$video = Video
 
 Vue.config.productionTip = false
-// Vue.prototype.$http = Axios
-Vue.config.productionTip = false
+// Vue.prototype.$http = Axios;
 
-const whiteList = ['/login', '/register', '/home', '/home1', '/home2', '/des', '/test', '/des'] // 不重定向白名单
+const whiteList = ['/login', '/register', '/home1', '/des','/'] // 不重定向白名单
 
 // 路由跳转前
 router.beforeEach((to, from, next) => {
@@ -35,12 +34,19 @@ router.beforeEach((to, from, next) => {
     next({path: '/login'})
   } else if (to.path === '/login') {
     if (isLogin != null) {
+      this.$alert('已登录！', 'OK', {
+        confirmButtonText: '确定'
+      })
       next({path: '/home1'})
     }
   } else if (isLogin == null) {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
-    } else { next({path: '/home1'}) }
+    } else {
+      this.$alert('请先登录！', 'OK', {
+        confirmButtonText: '确定'
+      })
+      next({path: '/home1'}) }
   }
 
   next()
@@ -55,6 +61,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
-  template: '<App/>'
+  render: h => h(App)
 })

@@ -2,16 +2,16 @@
   <div>
     <div class="box">
       <div class="max-box">
-        <div v-for="(row,index) in sliceList(films,9)" :key="index" class="row">
+        <div v-for="(row,index) in sliceList(films,6)" :key="index" class="row">
           <!--      <router-link to="/test"><img class="img" :src="film.src"></router-link>-->
           <!--        <br>{{film.desc}}-->
           <div v-for="(item,i) in row" :key="i" class="middle-box">
-            <router-link to="/des"><img class="img" :src="item.posterUrl"></router-link>
+            <div @click="goTo(item)"><img class="img" :src="item.posterUrl"></div>
           </div>
         </div>
       </div>
     </div>
-    <el-empty description="还什么都没有哦/(ㄒoㄒ)/~~"></el-empty>
+<!--    <el-empty description="还什么都没有哦/(ㄒoㄒ)/~~"></el-empty>-->
     <el-tooltip placement="top" content="回到顶部">
       <back-to-top :custom-style="myBackToTopStyle"
                    :visibility-height="300" :back-position="0" transition-name="fade"/>
@@ -38,152 +38,153 @@ export default {
         lineHeight: '45px', // 请保持与高度一致以垂直居中
         background: '#e7eaf1'// 按钮的背景颜色
       },
-      films: [
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(1).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(2).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(3).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(4).jpg')
-        },
-        {
-          id: '5',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(5).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(6).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(7).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(8).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(9).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(10).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(11).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(12).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('D:/film/src/assets/pic/p(1).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(2).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(3).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(4).jpg')
-        },
-        {
-          id: '5',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(5).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(6).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(7).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(8).jpg')
-        },
-        {
-          id: '1',
-          title: 'yiyiyi',
-          desc: '1',
-          src: require('../assets/pic/p(9).jpg')
-        },
-        {
-          id: '2',
-          title: 'ererer',
-          desc: '22222222222',
-          src: require('../assets/pic/p(10).jpg')
-        },
-        {
-          id: '3',
-          title: 'sansansan',
-          desc: '333333',
-          src: require('../assets/pic/p(11).jpg')
-        },
-        {
-          id: '4',
-          title: 'sisisi',
-          desc: '44444444444444444',
-          src: require('../assets/pic/p(12).jpg')
-        }
-      ]
+      films:[]
+      // films: [
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(1).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(2).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(3).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(4).jpg')
+      //   },
+      //   {
+      //     id: '5',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(5).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(6).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(7).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(8).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(9).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(10).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(11).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(12).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('D:/film/src/assets/pic/p(1).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(2).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(3).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(4).jpg')
+      //   },
+      //   {
+      //     id: '5',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(5).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(6).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(7).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(8).jpg')
+      //   },
+      //   {
+      //     id: '1',
+      //     title: 'yiyiyi',
+      //     desc: '1',
+      //     src: require('../assets/pic/p(9).jpg')
+      //   },
+      //   {
+      //     id: '2',
+      //     title: 'ererer',
+      //     desc: '22222222222',
+      //     src: require('../assets/pic/p(10).jpg')
+      //   },
+      //   {
+      //     id: '3',
+      //     title: 'sansansan',
+      //     desc: '333333',
+      //     src: require('../assets/pic/p(11).jpg')
+      //   },
+      //   {
+      //     id: '4',
+      //     title: 'sisisi',
+      //     desc: '44444444444444444',
+      //     src: require('../assets/pic/p(12).jpg')
+      //   }
+      // ]
       // urls: [
       //   '../assets/bg/loginbg.svg',
       //   'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
@@ -198,18 +199,24 @@ export default {
   },
   created() {
     // this.param = new FormData();
+    if(sessionStorage.getItem('isLogin')!=='true'){
+      // alert('submit!');1
+      this.$alert('请先登录！', 'OK', {
+        confirmButtonText: '确定'
+      })
+    }
     console.log(this.$store.getters.getUser.username)
     // this.param.append('user',this.$store.getters.getUser.username);
     const _this = this;
     _this.userName = this.$store.getters.getUser.username
     axios.post('http://106.55.103.151:8080/api/user/show-my-movies',_this.userName,{
       headers:{
-        authorization:localStorage.getItem('token')
+        authorization:'Bearer ' +localStorage.getItem('token')
       }
     })
       .then(function (resp) {
         console.log(resp);
-        _this.films = resp.data.data;
+        _this.films = resp.data.data.movies;
       })
   },
   computed: {
@@ -228,6 +235,13 @@ export default {
           return arrTemp
         }
       }
+    }
+  },
+  methods: {
+    goTo (item)
+    {
+      console.log(item)
+      this.$router.push({name:'Des', params:{dbID:item.dbID}})
     }
   }
 }
@@ -262,24 +276,24 @@ export default {
   background-position: center;
   overflow: hidden;
 }
-.middle-box img:nth-child(1){
-  flex: 1;
-  height: 200px;
-  background-color: pink;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
-.middle-box img:nth-child(n+2):nth-child(-n+5){
-  flex: 1;
-  height: 100px;
+/*.middle-box img:nth-child(1){*/
+/*  flex: 1;*/
+/*  height: 200px;*/
+/*  background-color: pink;*/
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*  overflow: hidden;*/
+/*}*/
+/*.middle-box img:nth-child(n+2):nth-child(-n+5){*/
+/*  flex: 1;*/
+/*  height: 100px;*/
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
+/*  background-repeat: no-repeat;*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*  overflow: hidden;*/
+/*}*/
 
 /*有多个小图片盒子的中盒子*/
 .middle-box-mult-min {

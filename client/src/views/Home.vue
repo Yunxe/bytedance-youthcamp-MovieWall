@@ -3,18 +3,16 @@
     <ul class="menu">
       <li class="logo"><img src="../assets/movieWallLogo.svg"></li>
       <li class="left1"></li>
-      <li><a href="/home1">主页</a></li>
+      <li><router-link to="/home1">主页</router-link></li>
       <li>|</li>
-      <li><a href="/home2">我的电影墙</a></li>
+      <li><router-link to="/home2">我的电影墙</router-link></li>
       <li class="right"><el-dropdown>
   <span class="el-dropdown-link">
     <i class="el-icon-arrow-down el-icon--right"></i>
   </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><a href="Login.vue">登录</a></el-dropdown-item>
-          <router-link to="/logout">
-            <el-dropdown-item>退出登陆</el-dropdown-item>
-          </router-link>
+          <el-dropdown-item><router-link to="/login">登录</router-link></el-dropdown-item>
+            <el-dropdown-item><router-link to="/logout">退出登陆</router-link></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       </li>
@@ -38,14 +36,7 @@ export default {
       userName: '游客'
     }
   },
-  methods: {
-    gotoHome1 () {
-      this.$router.replace('/home1')
-    },
-    gotoHome2 () {
-      this.$router.replace('/home2')
-    }
-  }
+  methods: {}
 }
 </script>
 

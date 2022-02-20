@@ -22,6 +22,11 @@ export default new Router({
   // ]
   routes: [
     {
+        path: '/',
+        name: 'Login',
+        component: Login
+      },
+    {
       // 登录页
       path: '/login',
       name: 'Login',

@@ -24,6 +24,7 @@
               class="styled-button__text">立即注册</span> </span> </span> </span> </button>
             <div class="zc">
               <el-button type="primary" plain @click="gotolink()">账号登录</el-button>
+              <el-button type="primary" plain><router-link to="/home1">去往首页</router-link></el-button>
 <!--              <el-button type="primary" plain @click="submit()">刷新</el-button>-->
             </div>
           </el-form-item>
@@ -248,5 +249,8 @@ p{
   margin-left: 20px;
   float: left;
   display: inline-block;
+}
+a{
+  text-decoration: none;
 }
 </style>
